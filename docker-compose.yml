@@ -1,0 +1,18 @@
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ee:latest'
+    hostname: 'gitlab'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://127.0.0.1:8050'
+        gitlab_rails['gitlab_shell_ssh_port'] = 522
+      GITLAB_ROOT_PASSWORD: 5iveL!fe
+    ports:
+      - '8050:8050'
+      - '522:22'
+    volumes:
+      - 'MOUNTDEVICENAME/gitlab/config:/etc/gitlab' 
+      - 'MOUNTDEVICENAME/gitlab/logs:/var/log/gitlab'
+      - 'MOUNTDEVICENAME/gitlab/data:/var/opt/gitlab'
+    privileged: true
